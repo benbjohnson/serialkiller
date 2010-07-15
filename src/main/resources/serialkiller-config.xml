@@ -1,0 +1,30 @@
+<flex-config>
+	<output>../../../target/serialkiller-1.0.0.swc</output>
+	<target-player>10.0.0</target-player>
+	<benchmark>false</benchmark>
+	<warnings>true</warnings>
+
+	<compiler>
+		<debug>true</debug>
+
+		<warn-no-constructor>false</warn-no-constructor>
+
+		<keep-generated-actionscript>false</keep-generated-actionscript>
+
+		<source-path>
+			<path-element>../flex</path-element>
+		</source-path>
+	</compiler>
+
+	<include-classes>
+		<class>SerialKillerClasses</class>
+	</include-classes>
+
+	<metadata>
+		<creator>Ben Johnson</creator>
+		<contributor>Ben Johnson</contributor>
+		<description>A Flex library for XML and JSON serialization.</description>
+		<language>EN</language>
+		<title>serialkiller</title>
+	</metadata>
+</flex-config>

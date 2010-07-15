@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="serialkiller" basedir=".">
+	<!-- Properties -->
+	<property environment="env"/>
+	<property name="FLEX_HOME" value="${env.FLEX_HOME}"/>
+	<property name="ASDOC" value="${FLEX_HOME}/bin/asdoc"/>
+
+	<property name="etc.dir" value="${basedir}/etc"/>
+	<property name="src.dir" value="${basedir}/src"/>
+	<property name="target.dir" value="${basedir}/target"/>
+	<property name="doc.dir" value="${target.dir}/doc"/>
+
+	<!-- Task Definitions -->
+	<taskdef resource="flexTasks.tasks" classpath="${etc.dir}/flexTasks.jar" />
+	<taskdef resource="flexUnitTasks.tasks" classpath="${etc.dir}/flexUnitTasks.jar" />
+
+	<!-- Target: Compile -->
+	<!-- compc -load-config+=src/main/resources/serialkiller-config.xml -->
+	<target name="compile">
+		<mkdir dir="${target.dir}"/>
+
+		<compc output="${target.dir}/serialkiller-1.0.0.swc">
+			<load-config filename="${src.dir}/main/resources/serialkiller-config.xml"/>
+			
+			<external-library-path dir="${FLEX_HOME}/frameworks/libs/player/10.0" append="true">
+				<include name="*.swc" />
+			</external-library-path>
+		</compc>
+	</target>
+
+
+	<!-- Target: Test -->
+	<!-- mxmlc -load-config+=src/test/resources/TestRunner-config.xml src/test/flex/TestRunner.mxml -->
+	<target name="test-compile">
+		<mkdir dir="${target.dir}/test"/>
+
+		<mxmlc file="${src.dir}/test/flex/TestRunner.mxml" output="${target.dir}/test/TestRunner.swf">
+			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
+			<load-config filename="${src.dir}/test/resources/TestRunner-config.xml"/>
+		</mxmlc>
+	</target>
+
+	<target name="test-copy-deps">
+		<copy file="${src.dir}/test/resources/TestRunner-app.xml" tofile="${target.dir}/test/TestRunner-app.xml" overwrite="true"/>
+	</target>
+
+	<!-- Target: Clean -->
+	<target name="clean">
+		<delete dir="${target.dir}"/>
+	</target>
+</project>
